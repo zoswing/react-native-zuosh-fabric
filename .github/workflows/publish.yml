@@ -1,0 +1,78 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        registry-url: 'https://registry.npmjs.org'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build package
+      run: npm run build
+      
+    - name: Check package version
+      run: |
+        node -e "
+          const pkg = require('./package.json');
+          const tag = process.env.GITHUB_REF.replace('refs/tags/v', '');
+          if (pkg.version !== tag) {
+            console.error('Package version does not match tag');
+            console.error('Package version:', pkg.version);
+            console.error('Tag version:', tag);
+            process.exit(1);
+          }
+          console.log('Version check passed:', pkg.version);
+        "
+        
+    - name: Publish to npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.ref }}
+        release_name: Release v${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          ## Release v${{ github.ref }}
+          
+          This release includes:
+          - Custom button component with Fabric architecture
+          - Android and iOS native implementations  
+          - TypeScript support
+          - Complete documentation and examples
+          
+          ### Installation
+          ```bash
+          npm install react-native-zuosh-fabric
+          ```
+          
+          ### Usage
+          ```tsx
+          import { CustomButton } from 'react-native-zuosh-fabric';
+          
+          <CustomButton
+            title="Press Me"
+            onPress={(event) => console.log('Pressed:', event.value)}
+          />

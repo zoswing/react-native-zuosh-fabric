@@ -1,0 +1,6 @@
+rootProject.name = 'react-native-zuosh-fabric'
+
+apply from: '../node_modules/@react-native-community/cli-platform-android/native_modules.gradle'; applyNativeModulesSettingsGradle(settings)
+
+include ':react-native-zuosh-fabric'
+project(':react-native-zuosh-fabric').projectDir = new File('../android')

@@ -1,0 +1,54 @@
+{
+  "name": "react-native-zuosh-fabric",
+  "version": "1.0.0",
+  "description": "A React Native Fabric custom button component with native implementation",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:tsc": "tsc",
+    "build:android": "cd android && ./gradlew assembleRelease",
+    "build:ios": "cd ios && xcodebuild -project react-native-zuosh-fabric.xcodeproj -scheme react-native-zuosh-fabric -configuration Release",
+    "codegen": "react-native codegen",
+    "prepare": "npm run build",
+    "publish": "node scripts/publish.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "fabric",
+    "custom-component",
+    "native-module",
+    "button"
+  ],
+  "author": "zuosh",
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-native": ">=0.82.0"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "latest",
+    "@types/react": "^19.0.0",
+    "@types/react-native": "^0.73.0",
+    "react": "^19.0.0",
+    "react-native": "^0.82.0",
+    "typescript": "^5.0.0"
+  },
+  "codegenConfig": {
+    "name": "RNZuoShFabricSpec",
+    "type": "components",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.zuosh.fabric"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zuosh/react-native-zuosh-fabric.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zuosh/react-native-zuosh-fabric/issues"
+  },
+  "homepage": "https://github.com/zuosh/react-native-zuosh-fabric#readme"
+}
