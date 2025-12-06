@@ -16,7 +16,7 @@
     "react-native": "0.82.0"
   },
   "devDependencies": {
-    "react-native-zuosh-fabric": "file:../",
+    "react-native-zuosh-fabric": "1.0.0",
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
