@@ -9,8 +9,10 @@
     "build": "node scripts/build.js",
     "build:tsc": "tsc",
     "build:android": "cd android && ./gradlew assembleRelease",
+    "build:android:macos": "node scripts/fix-macos-build.js && cd android && ./gradlew assembleRelease",
     "build:ios": "cd ios && xcodebuild -project react-native-zuosh-fabric.xcodeproj -scheme react-native-zuosh-fabric -configuration Release",
     "codegen": "react-native codegen",
+    "fix-macos-build": "node scripts/fix-macos-build.js",
     "prepare": "npm run build",
     "publish": "node scripts/publish.js",
     "test": "echo \"Error: no test specified\" && exit 1"
